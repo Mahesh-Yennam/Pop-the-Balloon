@@ -1,0 +1,17 @@
+{
+  "name": "Pop the Balloon — Sky Arcade Reflex Game",
+  "short_name": "Pop Balloon",
+  "description": "Tap and pop vibrant balloons floating up into the clouds before they fly away! Avoid explosive bomb hazards.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0284c7",
+  "theme_color": "#0284c7",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

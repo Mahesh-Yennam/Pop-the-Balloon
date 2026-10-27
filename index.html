@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RFQ8M0VSFN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-RFQ8M0VSFN');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Pop the Balloon — Sky Arcade Reflex Game | Gamility</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Play Pop the Balloon! A colorful sky reflex arcade game. Tap and pop vibrant rising balloons before they float away, catch power-ups, and avoid explosive bomb hazards.">
+  <meta name="keywords" content="pop the balloon, balloon popping game, reflex arcade, casual web game, tap game, sky game, gamility games">
+  <meta name="author" content="Gamility">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mahesh-yennam.github.io/Gamility/games/pop-the-balloon/index.html">
+
+  <!-- OpenGraph -->
+
+  <!-- Favicon & PWA -->
+    <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pop the Balloon — Sky Arcade Reflex Game | Gamility">
+  <meta property="og:description" content="Play Pop the Balloon! A colorful sky reflex arcade game. Tap and pop vibrant rising balloons before they float away, catch power-ups, and avoid explosive bomb hazards.">
+  <meta property="og:image" content="preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Pop the Balloon — Sky Arcade Reflex Game | Gamility">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pop the Balloon — Sky Arcade Reflex Game | Gamility">
+  <meta name="twitter:description" content="Play Pop the Balloon! A colorful sky reflex arcade game. Tap and pop vibrant rising balloons before they float away, catch power-ups, and avoid explosive bomb hazards.">
+  <meta name="twitter:image" content="preview.png">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0284c7">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       TOP GAMILITY RETURN RIBBON
+       ========================================================================= -->
+  <header class="top-nav-ribbon" role="banner">
+    <div class="ribbon-container">
+      <div class="ribbon-left">
+        <a href="https://mahesh-yennam.github.io/Gamility/" class="ribbon-brand" title="Gamility Home" aria-label="Gamility Home">
+          <svg width="22" height="22" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4L4 12V28L20 36L36 28V12L20 4Z" stroke="#f59e0b" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M20 12L12 16V24L20 28L28 24V16L20 12Z" fill="#ec4899" fill-opacity="0.85"/>
+            <circle cx="20" cy="20" r="3" fill="#ffffff"/>
+          </svg>
+          <span class="brand-name">Gamility</span>
+          <span class="brand-badge">Arcade</span>
+        </a>
+      </div>
+      <div class="ribbon-right">
+        <button type="button" class="btn-ribbon-icon" id="btnToggleAudio" aria-label="Toggle Sound" title="Toggle Sound">
+          <span id="audioIcon">🔊</span>
+        </button>
+        <a href="https://mahesh-yennam.github.io/Gamility/games.html" class="ribbon-back-btn" title="Back to All Games">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back to Games</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN GAME CONTAINER & STAGE
+       ========================================================================= -->
+  <main class="arcade-wrapper">
+    <div class="game-viewport" id="gameViewport">
+      
+      <!-- Top HUD Bar -->
+      <header class="game-hud-bar">
+        <!-- Left: Lives / Hearts -->
+        <div class="hud-group hud-lives-group" aria-label="Lives remaining">
+          <span class="hud-lbl">LIVES</span>
+          <div class="hud-hearts" id="hudHearts">
+            <span class="heart-icon active">❤️</span>
+            <span class="heart-icon active">❤️</span>
+            <span class="heart-icon active">❤️</span>
+          </div>
+        </div>
+
+        <!-- Center: Score & Combo -->
+        <div class="hud-group hud-score-group">
+          <span class="hud-lbl">SCORE</span>
+          <div class="hud-score-display">
+            <span class="hud-score-val" id="hudScore">0</span>
+            <span class="hud-combo-badge" id="hudComboBadge" style="display: none;">x1.5</span>
+          </div>
+        </div>
+
+        <!-- Right: High Score & Pause -->
+        <div class="hud-group hud-stats-group">
+          <div class="hud-high-box">
+            <span class="hud-lbl">BEST</span>
+            <span class="hud-high-val" id="hudHighScore">0</span>
+          </div>
+          <button type="button" class="btn-pause-game" id="btnPauseGame" aria-label="Pause game" title="Pause Game (Spacebar)">
+            ⏸
+          </button>
+        </div>
+      </header>
+
+      <!-- THE SKY STAGE (ATMOSPHERIC CLOUDSCAPE) -->
+      <div class="sky-stage" id="skyStage">
+        
+        <!-- Drifting Parallax Clouds -->
+        <div class="cloud-layer cloud-back"></div>
+        <div class="cloud-layer cloud-mid"></div>
+        <div class="cloud-layer cloud-front"></div>
+
+        <!-- Distant Hot Air Balloon Silhouettes -->
+        <div class="distant-balloon b-left">🎈</div>
+        <div class="distant-balloon b-right">🎈</div>
+
+        <!-- OPEN SKY BALLOON PLAYFIELD (RISING BALLOONS) -->
+        <div class="balloon-playfield" id="balloonPlayfield"></div>
+
+        <!-- Floating Particles & Confetti Overlay -->
+        <div class="particle-overlay" id="particleOverlay" aria-hidden="true"></div>
+
+        <!-- Bomb Shock Flash Overlay -->
+        <div class="shock-flash-screen" id="shockFlashScreen" aria-hidden="true"></div>
+
+        <!-- Ice Freeze Frost Overlay -->
+        <div class="frost-freeze-screen" id="frostFreezeScreen" aria-hidden="true">
+          <span class="frost-badge">❄️ FREEZE BREEZE!</span>
+        </div>
+
+      </div>
+
+      <!-- =========================================================================
+           GAME OVERLAYS & MODALS
+           ========================================================================= -->
+
+      <!-- START / INTRO OVERLAY -->
+      <div class="game-overlay active" id="startOverlay">
+        <div class="sky-sign-board">
+          <div class="sign-top-decor">🎈 🌤️ ✨</div>
+          <h1 class="sign-title">Pop the Balloon!</h1>
+          <p class="sign-subtitle">Sky Reflex Pop Arcade</p>
+
+          <div class="sign-rules-box">
+            <div class="rule-row">
+              <div class="rule-icon">🎈</div>
+              <div class="rule-desc">
+                <strong>Color Balloons</strong>: Pop before they escape! (+100 pts)
+              </div>
+            </div>
+            <div class="rule-row">
+              <div class="rule-icon">🌟</div>
+              <div class="rule-desc">
+                <strong>Gold & Ice</strong>: Fast +300 pts & freeze slow-mo power!
+              </div>
+            </div>
+            <div class="rule-row rule-hazard">
+              <div class="rule-icon">💣</div>
+              <div class="rule-desc">
+                <strong>Spiky Bomb</strong>: DANGER! Blast costs 1 Heart (❤️)
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn-sky-play" id="btnStartGame">
+            <span>START POPPING</span>
+            <span class="btn-arrow">▶</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PAUSE OVERLAY -->
+      <div class="game-overlay" id="pauseOverlay" style="display: none;">
+        <div class="sky-sign-board sign-board-sm">
+          <h2 class="sign-title">Sky Paused ⏸</h2>
+          <p class="sign-subtitle">Floating on a gentle breeze...</p>
+
+          <div class="pause-actions">
+            <button type="button" class="btn-sky-play" id="btnResumeGame">Resume Flight ▶</button>
+            <button type="button" class="btn-sky-secondary" id="btnRestartFromPause">Restart Game ↺</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAME OVER OVERLAY -->
+      <div class="game-overlay" id="gameOverOverlay" style="display: none;">
+        <div class="sky-sign-board">
+          <div class="sign-top-decor" id="gameOverIcon">💥 💣</div>
+          <h2 class="sign-title">Sky's The Limit!</h2>
+          <p class="sign-subtitle" id="gameOverReason">Those spiky bombs brought you back to earth!</p>
+
+          <!-- Final Stats Scorecard -->
+          <div class="game-stats-card">
+            <div class="stat-score-hero">
+              <span class="hero-lbl">FINAL SCORE</span>
+              <span class="hero-val" id="finalScoreVal">0</span>
+            </div>
+
+            <div class="stats-mini-grid">
+              <div class="mini-stat">
+                <span class="mini-lbl">Balloons Popped</span>
+                <span class="mini-val" id="finalBalloonsPopped">0</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-lbl">Best Combo</span>
+                <span class="mini-val" id="finalBestCombo">1x</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-lbl">Accuracy</span>
+                <span class="mini-val" id="finalAccuracy">0%</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-lbl">All-Time Best</span>
+                <span class="mini-val" id="finalHighScoreVal">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-over-actions">
+            <button type="button" class="btn-sky-play" id="btnPlayAgain">
+              <span>PLAY AGAIN</span>
+              <span class="btn-arrow">↺</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Audio Synthesizer & Game Script -->
+  <script src="game.js"></script>
+</body>
+</html>

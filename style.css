@@ -1,0 +1,868 @@
+/**
+ * POP THE BALLOON — Sky Arcade Reflex Game
+ * Sky Cloudscape Design & Responsive Interactive Styles
+ * Copyright © 2026 Gamility (All Rights Reserved)
+ */
+
+/* ==========================================================================
+   CSS TOKENS & VARIABLES
+   ========================================================================== */
+:root {
+  /* Sky Tones */
+  --sky-zenith: #0284c7;
+  --sky-mid: #38bdf8;
+  --sky-horizon: #bae6fd;
+  --sky-sun: #fef08a;
+
+  /* Balloon Palettes */
+  --balloon-red: #ff4757;
+  --balloon-blue: #1e90ff;
+  --balloon-yellow: #ffa502;
+  --balloon-green: #2ed573;
+  --balloon-purple: #9b59b6;
+  --balloon-pink: #ff6b81;
+  --balloon-gold: #facc15;
+  --balloon-ice: #7dd3fc;
+  --balloon-bomb: #0f172a;
+
+  /* UI Tokens */
+  --text-dark: #0f172a;
+  --text-light: #f8fafc;
+  --font-display: 'Outfit', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-sky: 0 12px 30px rgba(2, 132, 199, 0.3);
+  --shadow-cabinet: 0 25px 65px rgba(0, 0, 0, 0.65);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 20%, #0d1b2a 0%, #080c16 100%);
+  font-family: var(--font-body);
+  color: var(--text-light);
+  overflow: hidden;
+  position: fixed;
+}
+
+/* ==========================================================================
+   TOP GAMILITY RETURN RIBBON
+   ========================================================================== */
+.top-nav-ribbon {
+  height: 52px;
+  background: rgba(8, 12, 22, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.ribbon-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ribbon-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.ribbon-brand:hover {
+  transform: translateY(-1px);
+}
+
+.brand-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.ribbon-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-ribbon-icon {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-ribbon-icon:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+}
+
+.ribbon-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ribbon-back-btn:hover {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: #f59e0b;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   ARCADE WRAPPER (CENTERED PC VIEWPORT, FULLSCREEN MOBILE)
+   ========================================================================== */
+.arcade-wrapper {
+  width: 100%;
+  height: calc(100vh - 52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: radial-gradient(ellipse at 50% 25%, #0f2b48 0%, #08111e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient Sky Light Glow */
+.arcade-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+/* GAME VIEWPORT CABINET */
+.game-viewport {
+  width: 100%;
+  max-width: 480px;
+  height: min(840px, calc(100vh - 76px));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-cabinet), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(180deg, var(--sky-zenith) 0%, var(--sky-mid) 50%, var(--sky-horizon) 88%, var(--sky-sun) 100%);
+}
+
+/* ==========================================================================
+   HUD HEADER BAR
+   ========================================================================== */
+.game-hud-bar {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  height: 48px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 0.35rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hud-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-lbl {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #cbd5e1;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+/* Left Hearts / Lives */
+.hud-lives-group {
+  min-width: 90px;
+}
+
+.hud-hearts {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.heart-icon {
+  opacity: 0.25;
+  filter: grayscale(1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heart-icon.active {
+  opacity: 1;
+  filter: grayscale(0);
+  animation: heartPulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+/* Center Score & Combo */
+.hud-score-group {
+  align-items: center;
+  text-align: center;
+}
+
+.hud-score-display {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hud-score-val {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  line-height: 1;
+}
+
+.hud-combo-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  color: #ffffff;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+  animation: comboPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes comboPop {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* Right Stats & Pause */
+.hud-stats-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hud-high-box {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.hud-high-val {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fef08a;
+}
+
+.btn-pause-game {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-pause-game:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   THE SKY STAGE (CLOUDS & PARALLAX)
+   ========================================================================== */
+.sky-stage {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+/* Drifting Cloud Layers */
+.cloud-layer {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  pointer-events: none;
+  background-repeat: repeat-x;
+}
+
+.cloud-back {
+  top: 10%;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 200' preserveAspectRatio='none'%3E%3Cpath d='M0,120 Q50,90 110,110 Q160,80 230,105 Q300,70 380,100 Q450,85 520,110 Q600,75 700,105 Q760,90 800,120 L800,200 L0,200 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-size: 800px 200px;
+  animation: cloudDrift 45s infinite linear;
+}
+
+.cloud-mid {
+  top: 35%;
+  opacity: 0.45;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 160' preserveAspectRatio='none'%3E%3Cpath d='M0,100 Q60,65 140,85 Q210,50 300,80 Q380,55 450,75 Q520,60 600,95 L600,160 L0,160 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-size: 600px 160px;
+  animation: cloudDrift 30s infinite linear reverse;
+}
+
+.cloud-front {
+  bottom: 0;
+  height: 180px;
+  opacity: 0.55;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 140' preserveAspectRatio='none'%3E%3Cpath d='M0,80 Q40,40 110,65 Q170,30 250,55 Q330,25 410,50 Q460,40 500,75 L500,140 L0,140 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-size: 500px 140px;
+  animation: cloudDrift 20s infinite linear;
+}
+
+@keyframes cloudDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Distant Hot Air Balloon Silhouettes */
+.distant-balloon {
+  position: absolute;
+  font-size: 1.4rem;
+  opacity: 0.35;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+.b-left { top: 22%; left: 10%; animation: distantFloat 8s infinite ease-in-out alternate; }
+.b-right { top: 48%; right: 12%; animation: distantFloat 11s infinite ease-in-out alternate-reverse; }
+
+@keyframes distantFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-15px); }
+}
+
+/* ==========================================================================
+   BALLOON PLAYFIELD & RISING BALLOONS
+   ========================================================================== */
+.balloon-playfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+/* Dynamic Balloon Node */
+.balloon-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 86px;
+  height: 118px;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.08s ease;
+}
+
+.balloon-node:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.balloon-node.popped {
+  pointer-events: none;
+  animation: balloonBurst 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes balloonBurst {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.35); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+}
+
+/* Balloon SVG Styling */
+.balloon-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+  animation: balloonSway 2.4s infinite ease-in-out alternate;
+}
+
+@keyframes balloonSway {
+  0% { transform: rotate(-4deg); }
+  100% { transform: rotate(4deg); }
+}
+
+/* Special Balloon Glows */
+.balloon-gold .balloon-svg {
+  filter: drop-shadow(0 0 14px rgba(250, 204, 21, 0.9)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
+  animation: goldSway 1.8s infinite ease-in-out alternate;
+}
+
+@keyframes goldSway {
+  0% { transform: rotate(-5deg) scale(1.02); }
+  100% { transform: rotate(5deg) scale(1.08); }
+}
+
+.balloon-ice .balloon-svg {
+  filter: drop-shadow(0 0 14px rgba(125, 211, 252, 0.95)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+}
+
+.balloon-heart .balloon-svg {
+  filter: drop-shadow(0 0 14px rgba(244, 63, 94, 0.9)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+}
+
+.balloon-bomb .balloon-svg {
+  filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.8)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5));
+  animation: bombWobble 0.6s infinite ease-in-out alternate;
+}
+
+@keyframes bombWobble {
+  0% { transform: scale(0.97) rotate(-3deg); }
+  100% { transform: scale(1.05) rotate(3deg); }
+}
+
+/* ==========================================================================
+   PARTICLES, CONFETTI & SCORE SPLASHES
+   ========================================================================== */
+.particle-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* Confetti Sparkle */
+.confetti-bit {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  pointer-events: none;
+  animation: confettiExplode 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes confettiExplode {
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0.3) rotate(360deg); opacity: 0; }
+}
+
+/* Floating Score Bubble */
+.score-bubble {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.55rem;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.6);
+  transform: translate(-50%, -50%);
+  animation: floatUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 30;
+}
+
+.score-bubble.gold {
+  color: #fde047;
+  font-size: 1.95rem;
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.9);
+}
+
+.score-bubble.freeze {
+  color: #7dd3fc;
+  font-size: 1.8rem;
+  text-shadow: 0 0 20px rgba(125, 211, 252, 0.95);
+}
+
+.score-bubble.ouch {
+  color: #ef4444;
+  font-size: 2rem;
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.9);
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+  25% { opacity: 1; transform: translate(-50%, -20px) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%, -60px) scale(0.9); }
+}
+
+/* Red Shock Screen Flash */
+.shock-flash-screen {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.6) 0%, rgba(185, 28, 28, 0.85) 100%);
+  z-index: 35;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.08s ease;
+}
+
+.shock-flash-screen.flash {
+  opacity: 1;
+}
+
+/* Ice Frost Overlay */
+.frost-freeze-screen {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(125, 211, 252, 0.25) 0%, rgba(2, 132, 199, 0.4) 100%);
+  border: 4px solid #7dd3fc;
+  z-index: 36;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.frost-freeze-screen.active {
+  opacity: 1;
+}
+
+.frost-badge {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: rgba(2, 132, 199, 0.85);
+  border: 2px solid #7dd3fc;
+  padding: 0.4rem 1.25rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 20px rgba(125, 211, 252, 0.8);
+  animation: freezePulse 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes freezePulse {
+  0% { transform: scale(0.95); }
+  100% { transform: scale(1.05); }
+}
+
+/* ==========================================================================
+   OVERLAYS & SKY SIGNBOARDS
+   ========================================================================== */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 14, 28, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.game-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Cloud-Themed Signboard */
+.sky-sign-board {
+  background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
+  border: 3px solid #38bdf8;
+  border-radius: var(--radius-xl);
+  padding: 2rem 1.85rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.25);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  animation: signDrop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sign-board-sm {
+  max-width: 380px;
+}
+
+@keyframes signDrop {
+  0% { transform: translateY(-30px) scale(0.95); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.sign-top-decor {
+  font-size: 2.3rem;
+  line-height: 1;
+}
+
+.sign-title {
+  font-family: var(--font-display);
+  font-size: 2.15rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.02em;
+}
+
+.sign-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #bae6fd;
+}
+
+/* Rules / Instructions Box */
+.sign-rules-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  text-align: left;
+}
+
+.rule-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rule-icon {
+  font-size: 1.35rem;
+  width: 26px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rule-desc {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+}
+
+.rule-hazard .rule-desc strong {
+  color: #f87171;
+}
+
+/* Buttons */
+.btn-sky-play {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border: 2px solid #fef08a;
+  color: #451a03;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  transition: all 0.2s ease;
+}
+
+.btn-sky-play:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(217, 119, 6, 0.7);
+  filter: brightness(1.08);
+}
+
+.btn-sky-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-sky-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.pause-actions, .game-over-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Final Score Card */
+.game-stats-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.stat-score-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-lbl {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #cbd5e1;
+}
+
+.hero-val {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #fde047;
+  text-shadow: 0 0 15px rgba(253, 224, 71, 0.5);
+  line-height: 1;
+}
+
+.stats-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+}
+
+.mini-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-lbl {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.mini-val {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE ADAPTATION)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .arcade-wrapper {
+    padding: 0;
+    min-height: calc(100vh - 52px);
+    background: transparent;
+  }
+
+  .arcade-wrapper::before {
+    display: none;
+  }
+
+  .game-viewport {
+    max-width: 100%;
+    height: calc(100vh - 52px);
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .game-hud-bar {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .hud-score-val {
+    font-size: 1.45rem;
+  }
+
+  .balloon-node {
+    width: 68px;
+    height: 96px;
+  }
+
+  .sky-sign-board {
+    padding: 1.6rem 1.25rem;
+    max-width: 92%;
+  }
+
+  .sign-title {
+    font-size: 1.85rem;
+  }
+}
